@@ -1,18 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package tennis;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- *
- * @author test
- */
 public class TennisClient {
     
     public static void main(String[] args) {
@@ -28,7 +18,7 @@ public class TennisClient {
                 if ( scoreboard.updateScore(s.charAt(i)) ){
                     break;
                 }
-                scoreboard.displayScore();
+              //  scoreboard.displayScore();
             }
         }
         catch(IOException e)
@@ -57,56 +47,53 @@ class ScoreBoard {
         this.p2 = p2;
     }
 
-    public boolean updateScore( char player ) {
-        boolean gameDone = false;
-        System.out.print(player + "   " +this.p1Index + "    " + this.p2Index + "    ");
-        if ( player == 'D' ) {
-            
-            if ( bothAtAdvantage() ) {
-                this.p1Index = 3;
-                this.p2Index = 3;
-                
-            }
-            else if ( this.p1Index == 5 && this.p1Index - this.p2Index == 2 || scores[this.p1Index] == "40" && this.p2Index < this.p1Index ) {
-                System.out.println("D wins");
-                gameDone = true;
-            }
-            else {
-                p1Index++;
-                if ( this.p1Index == 5 && this.p1Index - this.p2Index == 2 ) {
-                    gameDone = true;
-                    System.out.println(" D Wins");
-                }
-            }
-        }
-        else if ( player == 'F' ) {
-            
-            if ( bothAtAdvantage() ) {
-                this.p1Index = 3;
-                this.p2Index = 3;
 
-            }
-            else if ( this.p2Index == 5 && this.p2Index - this.p1Index == 2 || scores[this.p2Index] == "40" && this.p1Index < this.p2Index ) {
-                System.out.println("F wins");
-                gameDone = true;
-            }
-            else {
-                p2Index++;
-                if ( this.p2Index == 5 && this.p2Index - this.p1Index == 2 ) {
-                    gameDone = true;
-                    System.out.println("F Wins");
-                }
-            }
-        }
-        
-        setP1Score(scores[p1Index]);
-        setP2Score(scores[p2Index]);
-        return gameDone;
-    }
-    private boolean bothAtAdvantage() {
-        return this.p1Index == 4 && this.p2Index == 4;   
-    }
-    public void displayScore() {
-        System.out.println(this.p1 + "   " + this.p2);
-    }
-}
+	public boolean updateScore(char pointWinner) {
+		if (pointWinner == 'D') {
+			p1Index++;
+		}
+		else {
+			p2Index++;
+		}
+		
+		if (gameIsWon()) {
+			if (p1Index > p2Index) {
+				System.out.println("D wins the game");
+				return true;
+			}
+			else {
+				System.out.println("F wins the game");
+				return true;
+			}
+		}
+		
+		else if ( p1Index == 4 && p2Index == 4 ) {
+			p1Index = 3;
+			p2Index = 3;
+			System.out.println(scores[p1Index] + " : " + scores[p2Index]);
+			return false;
+		}
+		
+		else {
+			System.out.println(scores[p1Index] + " : " + scores[p2Index]);
+			return false;
+		}
+	
+	
+	}
+	
+	public boolean gameIsWon() {
+		boolean gtThanForty = p1Index > 3 || p2Index > 3;
+		boolean diffGtThanOne = Math.abs(p1Index - p2Index) >= 2;
+		
+		return gtThanForty && diffGtThanOne;
+	}
+	
+	 public void displayScore() {
+		 System.out.println(this.p1 + "   " + this.p2);
+	 }
+	
+}	
+	
+
+
