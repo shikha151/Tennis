@@ -6,16 +6,20 @@ class TennisGame {
      * @param args the command line arguments
      */
     ScoreBoard scoreboard;
-    public TennisGame() {
+
+    public TennisGame(string s) {
+
         scoreboard = new ScoreBoard();
+
+
+        //loop through the letters in the input string
+        for( int i=0;i<s.length();i++){
+            scoreboard.updateScore(s.charAt(i));
+            scoreboard.displayScore();
+        }
+
+
     }
-    public void displayScores() {
-        
-    }
-    public void computeScores( String scoreInp ) {
-        
-    }
-    
 }
 class ScoreBoard {
     private String p1;
@@ -25,6 +29,7 @@ class ScoreBoard {
         this.p1 = "0";
         this.p2  = "0";
     }
+
     public void setP1Score( String p1) {
         this.p1 = p1;
     }
@@ -37,5 +42,8 @@ class ScoreBoard {
     public String getP2Score() {
         return this.p2;
     }
-    
+
+
+    public void updateScore(char player);
+    public void displayScore();
 }

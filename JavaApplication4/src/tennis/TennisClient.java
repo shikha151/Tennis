@@ -12,6 +12,19 @@ package tennis;
 public class TennisClient {
     
     public static void main(String[] args) {
-        TennisGame game = new TennisGame();
+        System.out.println("Give the input string");
+        try{
+            BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+            String s = bufferRead.readLine();
+            TennisGame game = new TennisGame(s);
+
+            //System.out.println(s);
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
     }
 }
