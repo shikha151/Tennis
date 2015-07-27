@@ -18,7 +18,6 @@ public class TennisClient {
                 if ( scoreboard.updateScore(s.charAt(i)) ){
                     break;
                 }
-              //  scoreboard.displayScore();
             }
         }
         catch(IOException e)
